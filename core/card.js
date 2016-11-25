@@ -10,6 +10,7 @@ var onMouseOver = function(e) {
         card.getElementsByClassName("to")[0].innerHTML = moment(e.to).format("LL");
         card.getElementsByClassName("duration")[0].innerHTML = moment.duration(e.duration, unit).humanize();
         card.getElementsByClassName("photo")[0].src = './images/' + e.name + '.png';
+        card.getElementsByClassName("photo")[0].alt = e.name;
     }
 };
 
