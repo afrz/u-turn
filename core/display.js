@@ -1,31 +1,25 @@
 function display() {
 
-
     var chart = d3.select("body")
         .append("svg")
         .attr("width", w + mLeft + mRight)
         .attr("height", h + mTop + mBottom)
         .attr("class", "chart");
 
+    displayTimeline(chart);
+    //displayPersons(chart);
 
-
-    var getName = function(d) {
-        return d.name;
-    }
-    var getTeamClass = function(d) {
-        return "team_" + d.team;
-    }
-
-
+    /*
     var main = chart.append("g")
         //.attr("transform", "translate(" + (m[3]) + "," + (m[0]) + ")")
         //.attr("transform", "translate(" + m[3] + "," + (m[0]) + ")")
         .attr("width", w)
         .attr("height", mainHeight)
         .attr("class", "main");
+        */
 
     // main.append("g").selectAll(".idLines")
-    // 	.data(items)
+    // 	.data(persons)
     // 	.enter().append("line")
     // 	.attr("x1", mLeft)
     // 	.attr("y1", function(d) {return y1(d.id);})
@@ -35,7 +29,7 @@ function display() {
 
 
     //compute TIMELINE information
-
+    /*
     var timeLine = [];
     var timeCounter = moment(epochString);
 
@@ -48,7 +42,7 @@ function display() {
         var primer = timeCounter.get('month') === 0;
         timeLine.push({
             timer: timeCounter.diff(epoch, unit),
-            label: primer ? timeCounter.format("YY/MM") : '',
+            label: primer ? timeCounter.format("YYYY") : '',
             kind: primer ? 'primary' : 'secondary'
         });
         timeCounter.add(1, 'M');
@@ -90,6 +84,7 @@ function display() {
             return x.kind === 'primary' ? '-1ex' : '2ex';
         });
     //.attr("dy", "-1ex");
+    */
     /*
     		chart.append("defs").append("clipPath")
     			.attr("id", "clip")
@@ -98,14 +93,14 @@ function display() {
     			.attr("height", mainHeight);
 
     		var main = chart.append("g")
-    					.attr("transform", "translate(" + m[3] + "," + (miniHeight + m[0]) + ")")
+    					.attr("transform", "translate(" + m[3] + "," + (personChartHeight + m[0]) + ")")
     					.attr("width", w)
     					.attr("height", mainHeight)
     					.attr("class", "main");
 
     		//main lanes and texts
     		main.append("g").selectAll(".idLines")
-    			.data(items)
+    			.data(persons)
     			.enter().append("line")
     			.attr("x1", m[1])
     			.attr("y1", function(d) {return y1(d.id);})
@@ -114,7 +109,7 @@ function display() {
     			.attr("stroke", "lightgray")
 
     		main.append("g").selectAll(".idText")
-    			.data(items)
+    			.data(persons)
     			.enter().append("text")
     			.text(getName)
     			.attr("x", -m[1])
@@ -126,14 +121,21 @@ function display() {
 
     var mini = chart.append("g")
         //.attr("transform", "translate(" + m[3] + "," + (mainHeight + m[0]) + ")")
-        .attr("transform", "translate(0," + (mainHeight + mTop) + ")")
+        .attr("transform", "translate(0," + (timeChartHeight + mTop) + ")")
         .attr("width", w)
-        .attr("height", miniHeight)
+        .attr("height", personChartHeight)
         .attr("class", "mini");
+
+    var getName = function(d) {
+        return d.name;
+    }
+    var getTeamClass = function(d) {
+        return "team_" + d.team;
+    }
 
     //mini lanes and texts
     // mini.append("g").selectAll(".idLines")
-    // 	.data(items)
+    // 	.data(persons)
     // 	.enter().append("line")
     // 	.attr("x1", function(d) { return scaleX(d.start)})
     // 	.attr("y1", function(d) {return scaleY2(d.id);})
@@ -142,7 +144,7 @@ function display() {
     // 	.attr("stroke", "#ccc");
 
     // mini.append("g").selectAll(".idText")
-    // 	.data(items)
+    // 	.data(persons)
     // 	.enter().append("text")
     // 	.text(getName)
     // 	.attr("x", -m[1])
@@ -153,7 +155,7 @@ function display() {
 
     //mini item rects
     mini.append("g").selectAll("miniItems")
-        .data(items)
+        .data(persons)
         .enter().append("rect")
         .attr("class", getTeamClass)
         .attr("x", function(d) {
@@ -163,7 +165,7 @@ function display() {
             return scaleY2(d.id + .5) - 7;
         })
         .attr("width", function(d) {
-            return linearWidth(d.duration);
+            return linearWidth(d.duration); //TODO  + 1;
         })
         .attr("height", 15)
         .on("mouseover", onMouseOver)
@@ -171,7 +173,7 @@ function display() {
 
     //mini labels
     mini.append("g").selectAll(".miniLabels")
-        .data(items)
+        .data(persons)
         .enter().append("text")
         .text(getName)
         .attr("x", function(d) {

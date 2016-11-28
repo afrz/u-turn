@@ -8,12 +8,12 @@ var scaleX = d3.scale.linear()
 //     .range([0, w]);
 //
 // var y1 = d3.scale.linear()
-//     .domain([0, itemsLength])
-//     .range([0, mainHeight]);
+//     .domain([0, totalPersons])
+//     .range([0, timeChartHeight]);
 
 var scaleY2 = d3.scale.linear()
-    .domain([0, itemsLength])
-    .range([0, miniHeight]);
+    .domain([0, totalPersons])
+    .range([0, personChartHeight]);
 
 var linearWidth = function(num) {
     return (num * w) / (timeEnd - timeBegin);

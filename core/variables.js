@@ -5,7 +5,7 @@ var epoch = moment(epochString);
 
 var now = moment().format('YYYY-MM-DD');
 
-var items = employees
+var persons = employees
     .sort(function(x, y) {
         return x.from < y.from ? -1 : 1;
     })
@@ -42,15 +42,15 @@ var items = employees
     });
 
 
-var itemsLength = items.length;
+var totalPersons = persons.length;
 
 //time is relative from epoch (epoch is 0)
 var timeBegin = 0;
-var timeEnd = _.max(items, function(x) {
+var timeEnd = _.max(persons, function(x) {
     return x.end;
 }).end;
 // console.log(timeBegin, timeEnd);
-// console.log(items);
+// console.log(persons);
 
 var mRight = 20;
 var mLeft = 125;
@@ -59,5 +59,14 @@ var mBottom = 20;
 var w = screen.availWidth - mLeft - mRight - 50;
 var h = screen.availHeight - mTop - mBottom;
 
-var miniHeight = itemsLength * 20;
-var mainHeight = h - miniHeight;
+var personHeight = 20;
+var personChartHeight = totalPersons * personHeight;
+var timeChartHeight = h - personChartHeight;
+
+//count employee at a specific timing (relative)
+function countEmployees(timing) {
+
+    return persons.filter(function(x) {
+        return x.start <= timing && x.end > timing;
+    }).length;
+}

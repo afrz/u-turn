@@ -25,15 +25,10 @@ body {
 .chart {
   shape-rendering: crispEdges;
   background-color: #eee;
-  border : 1px solid red;
+  /*border : 1px solid red;*/
 }
 
-.mini text {
-  font-size: 12px;
-  text-align: right;
-}
-
-g.main {
+g.timeChart {
   font-size: 12px;
 }
 
@@ -61,23 +56,19 @@ g.main {
   cursor : crosshair;
 }
 
-.absciss_main {
-  stroke-width: 1;
-  stroke: black;
-}
-
 .absciss_primary {
   stroke-width: 1;
-  stroke: black;
+  stroke: gray;
+  opacity: 1.0;
 }
 
 .absciss_secondary {
   stroke-width: 1;
   stroke: lightgray;
-  opacity: 0.9;
+  opacity: 0.6;
 }
-/*.brush .extent {
-  stroke: gray;
-  fill: gray;
-  fill-opacity: .2;
-}*/
+
+.absciss_now {
+  stroke-width: 2;
+  stroke: black;
+}
