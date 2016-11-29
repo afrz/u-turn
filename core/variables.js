@@ -61,12 +61,13 @@ var h = screen.availHeight - mTop - mBottom;
 
 var personHeight = 20;
 var personChartHeight = totalPersons * personHeight;
-var timeChartHeight = h - personChartHeight;
+var timeChartHeight = personChartHeight + 25 + mTop; //TODO
+console.log(personChartHeight);
 
 //count employee at a specific timing (relative)
 function countEmployees(timing) {
 
     return persons.filter(function(x) {
-        return x.start <= timing && x.end > timing;
+        return x.start < timing && x.end >= timing;
     }).length;
 }

@@ -17,7 +17,8 @@ while (timeCounter.isBefore(now)) {
 timeLine.push({
     timing: timeEnd,
     label: now,
-    kind: 'now'
+    kind: 'now',
+    count: countEmployees(timeEnd)
 });
 
 function displayTimeline(chart) {
@@ -53,14 +54,13 @@ function displayTimeline(chart) {
             return x.kind === 'secondary' ? mTop + 10 : mTop;
         })
         .attr("x2", xOffset)
-        .attr("y2", timeChartHeight + 700); //TODO depend on timer.counter)
+        .attr("y2", timeChartHeight);
 
     timeChart.append("g").selectAll(".miniLabels")
         .data(timeLine)
         .enter().append("text")
         .text(function(d) {
-            return d.count; // TODO
-            // return d.label;
+            return d.label;
         })
         .attr("x", xOffset)
         .attr("y", mTop)
