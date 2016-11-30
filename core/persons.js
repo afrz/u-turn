@@ -1,10 +1,8 @@
 function displayPersons(chart) {
 
-    const paddingTop = 25;
-
     var personChart = chart.append("g")
         //.attr("transform", "translate(" + m[3] + "," + (mainHeight + m[0]) + ")")
-        .attr("transform", "translate(0," + (paddingTop + mTop) + ")")
+        .attr("transform", "translate(0," + (chartShift + mTop) + ")")
         .attr("width", w)
         .attr("height", personChartHeight)
         .attr("class", "mini");

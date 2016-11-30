@@ -1,6 +1,6 @@
 var unit = 'days';
 moment.locale("fr");
-var epochString = '2010-01-01';
+var epochString = getParameterByName('start') || '2012-01-01';
 var epoch = moment(epochString);
 
 var now = moment().format('YYYY-MM-DD');
@@ -56,13 +56,17 @@ var mRight = 20;
 var mLeft = 125;
 var mTop = 20;
 var mBottom = 20;
+//compute available display size (minus some hardcoded values that depends on screen resolution...)
 var w = screen.availWidth - mLeft - mRight - 50;
-var h = screen.availHeight - mTop - mBottom;
+var h = screen.availHeight - mTop - mBottom - 120;
+
+//size to take to shift chart between them
+var chartShift = 10;
 
 var personHeight = 20;
 var personChartHeight = totalPersons * personHeight;
-var timeChartHeight = personChartHeight + 25 + mTop; //TODO
-console.log(personChartHeight);
+var timeChartHeight = personChartHeight + mTop + chartShift;
+var counterChartHeight = personChartHeight + mTop + chartShift;
 
 //count employee at a specific timing (relative)
 function countEmployees(timing) {
@@ -70,4 +74,10 @@ function countEmployees(timing) {
     return persons.filter(function(x) {
         return x.start < timing && x.end >= timing;
     }).length;
+}
+
+//extract paramater from URL
+function getParameterByName(name) {
+    var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+    return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
 }

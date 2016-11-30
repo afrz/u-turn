@@ -59,7 +59,7 @@ g.timeChart {
 .absciss_primary {
   stroke-width: 1;
   stroke: gray;
-  opacity: 1.0;
+  opacity: 0.6;
 }
 
 .absciss_secondary {

@@ -8,6 +8,7 @@ function display() {
 
     displayTimeline(chart);
     displayPersons(chart);
+    displayCounters(chart);
 }
 
 document.addEventListener("DOMContentLoaded", function() {
