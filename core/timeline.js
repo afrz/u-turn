@@ -8,8 +8,7 @@ while (timeCounter.isBefore(now)) {
     timeLine.push({
         timing: timing,
         label: primer ? timeCounter.format("YYYY") : '',
-        kind: primer ? 'primary' : 'secondary',
-        count: countEmployees(timing)
+        kind: primer ? 'primary' : 'secondary'
     });
     timeCounter.add(1, 'M');
 }
@@ -17,8 +16,7 @@ while (timeCounter.isBefore(now)) {
 timeLine.push({
     timing: timeEnd,
     label: now,
-    kind: 'now',
-    count: countEmployees(timeEnd)
+    kind: 'now'
 });
 
 function displayTimeline(chart) {

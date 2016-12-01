@@ -72,3 +72,8 @@ g.timeChart {
   stroke-width: 2;
   stroke: black;
 }
+
+.lineCounter {
+  stroke-width: 2;
+  stroke: red;
+}
