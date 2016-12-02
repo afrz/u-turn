@@ -26,10 +26,13 @@ function displayPersons(chart) {
         .attr("y", function(d) {
             return scaleY2(d.id + .5) - 7;
         })
-        .attr("width", function(d) {
-            return linearWidth(d.duration) + 1;
+        .attr("width", function(p) {
+            return linearWidth(p.duration) + 1;
         })
         .attr("height", 15)
+        .attr("opacity", function(p) {
+            return p.here ? 1 : 0.4;
+        })
         .on("mouseover", onMouseOver)
         .on("mouseout", onMouseOut);
 

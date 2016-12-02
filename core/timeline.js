@@ -8,7 +8,8 @@ while (timeCounter.isBefore(now)) {
     timeLine.push({
         timing: timing,
         label: primer ? timeCounter.format("YYYY") : '',
-        kind: primer ? 'primary' : 'secondary'
+        kind: primer ? 'primary' : 'secondary',
+        counter: countEmployees(timing)
     });
     timeCounter.add(1, 'M');
 }
@@ -16,7 +17,8 @@ while (timeCounter.isBefore(now)) {
 timeLine.push({
     timing: timeEnd,
     label: now,
-    kind: 'now'
+    kind: 'now',
+    counter: countEmployees(timeEnd)
 });
 
 function displayTimeline(chart) {
@@ -28,10 +30,6 @@ function displayTimeline(chart) {
         .attr("width", w)
         .attr("height", timeChartHeight)
         .attr("class", "timeChart");
-
-    var xOffset = function(t) {
-        return mLeft + linearWidth(t.timing);
-    };
 
     var labelYOffset = function(t) {
         return t.kind === 'secondary' ? '2ex' : '-1ex';
@@ -47,11 +45,11 @@ function displayTimeline(chart) {
         .attr("class", function(x) {
             return "absciss_" + x.kind;
         })
-        .attr("x1", xOffset)
+        .attr("x1", timeXOffset)
         .attr("y1", function(x) {
             return x.kind === 'secondary' ? mTop + 10 : mTop;
         })
-        .attr("x2", xOffset)
+        .attr("x2", timeXOffset)
         .attr("y2", timeChartHeight);
 
     timeChart.append("g").selectAll(".miniLabels")
@@ -60,7 +58,7 @@ function displayTimeline(chart) {
         .text(function(d) {
             return d.label;
         })
-        .attr("x", xOffset)
+        .attr("x", timeXOffset)
         .attr("y", mTop)
         .attr("dx", labelXOffset)
         .attr("dy", labelYOffset);

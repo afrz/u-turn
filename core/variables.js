@@ -15,6 +15,7 @@ var persons = employees
         //set default end at today if not specified
         if (!x.to) {
             x.to = now;
+            x.here = true;
         }
 
         //start minimum is 0
@@ -49,6 +50,7 @@ var timeBegin = 0;
 var timeEnd = _.max(persons, function(x) {
     return x.end;
 }).end;
+
 // console.log(timeBegin, timeEnd);
 // console.log(persons);
 

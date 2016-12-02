@@ -1,5 +1,7 @@
 function displayCounters(chart) {
 
+    //TODO check to pass chart shift differently
+
     var counterChart = chart.append("g")
         //.attr("transform", "translate(" + m[3] + "," + (mainHeight + m[0]) + ")")
         .attr("transform", "translate(0," + (chartShift + mTop) + ")")
@@ -7,65 +9,75 @@ function displayCounters(chart) {
         .attr("height", counterChartHeight)
         .attr("class", "mini");
 
-    //TODO
-    var xOffset = function(t) {
-        return mLeft + linearWidth(t.timing);
-    };
+
+
+    //max person for a time slice
+    var maxPerson = _.max(timeLine, function(x) {
+        return x.counter;
+    }).counter;
 
     var yOffset = function(t) {
         return 800 + linearWidth(t.timing);
     };
 
-    var countNumber = function(t) {
-        return t.total;
-    };
+    var computePoint = function(ct) {
 
-    //TODO check to pass chart shift differently
-
-    var computePoint = function(t) {
+        // console.log(ct)
         return {
-            X: xOffset(t),
-            Y: 500 + countEmployees(t.timing)
+            X: timeXOffset(ct),
+            Y: countYHeight(ct, maxPerson)
         }
     }
 
-    var counterLines = timeLine.map(function(t, index, tab) {
-        // var time = t.timing;
-        var counterTime = {
-            timing: t.timing,
-            total: countEmployees(t.timing)
+    var counterLines = timeLine.map(function(time, index, tab) {
+
+        var counterTime = Object.assign({}, time);
+        counterTime.pointA = computePoint(time);
+
+        if (index + 1 === tab.length) {
+            counterTime.pointB = counterTime.pointA
+        } else {
+            counterTime.pointB = computePoint(tab[index + 1]);
         }
-        counterTime.pointA = computePoint(t);
-        counterTime.pointB = computePoint(tab[index++]);
         return counterTime;
     });
 
-    console.log(counterLines);
+    var dy = 0;
+    var dyf = function(t) {
+        dy = dy + 10
+        return dy;
+    }
+
+    var countNumber = function(t) {
+        // return countYHeight(t, maxPerson);
+        // /return `(${t.pointA.X},${t.pointA.Y})->(${t.pointB.X},${t.pointB.Y})`;
+        return t.total;
+    };
 
     counterChart.append("g").selectAll(".miniLabels")
         .data(counterLines)
         .enter().append("text")
         .text(countNumber)
-        .attr("x", xOffset)
-        .attr("y", mTop + 560)
+        .attr("x", timeXOffset)
+        .attr("y", mTop + 100)
         .attr("dx", -5)
-        .attr("dy", 0);
+        .attr("dy", dyf); ///dy + 10);
 
     counterChart.append("g").selectAll(".idLines")
         .data(counterLines)
         .enter().append("line")
         .attr("class", "lineCounter")
-        .attr("x1", function(c) {
-            return c.pointA.X;
+        .attr("x1", function(ct) {
+            return ct.pointA.X;
         })
-        .attr("y1", function(c) {
-            return c.pointA.Y;
+        .attr("y1", function(ct) {
+            return ct.pointA.Y;
         })
-        .attr("x2", function(c) {
-            return c.pointA.X + 30;
+        .attr("x2", function(ct) {
+            return ct.pointB.X;
         })
-        .attr("y2", function(c) {
-            return c.pointA.Y;
+        .attr("y2", function(ct) {
+            return ct.pointB.Y;
         });
 
     // var getName = function(d) {

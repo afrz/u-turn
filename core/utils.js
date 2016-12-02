@@ -18,3 +18,12 @@ var scaleY2 = d3.scale.linear()
 var linearWidth = function(num) {
     return (num * w) / (timeEnd - timeBegin);
 }
+
+var timeXOffset = function(t) {
+    return mLeft + linearWidth(t.timing);
+};
+
+var countYHeight = function(ct, max) {
+    const availHeight = personChartHeight;
+    return availHeight - (ct.counter * availHeight) / max;
+}
