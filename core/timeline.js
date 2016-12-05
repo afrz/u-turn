@@ -9,7 +9,7 @@ while (timeCounter.isBefore(now)) {
         timing: timing,
         label: primer ? timeCounter.format("YYYY") : '',
         kind: primer ? 'primary' : 'secondary',
-        counter: countEmployees(timing)
+        counter: countEmployees(timing, false)
     });
     timeCounter.add(1, 'M');
 }
@@ -18,12 +18,10 @@ timeLine.push({
     timing: timeEnd,
     label: now,
     kind: 'now',
-    counter: countEmployees(timeEnd)
+    counter: countEmployees(timeEnd, true)
 });
 
 function displayTimeline(chart) {
-
-    // console.log(timeLine);
 
     var timeChart = chart.append("g")
         //.attr("transform", "translate(" + (m[3]) + "," + (m[0]) + ")")

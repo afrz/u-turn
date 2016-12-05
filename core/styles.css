@@ -77,3 +77,7 @@ g.timeChart {
   stroke-width: 2;
   stroke: gray;
 }
+
+.labelCounter {
+  opacity: 0.5;
+}

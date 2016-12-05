@@ -71,10 +71,11 @@ var timeChartHeight = personChartHeight + mTop + chartShift;
 var counterChartHeight = personChartHeight + mTop + chartShift;
 
 //count employee at a specific timing (relative)
-function countEmployees(timing) {
+function countEmployees(timing, inclusive = false) {
 
     return persons.filter(function(x) {
-        return x.start < timing && x.end >= timing;
+        const withEnd = inclusive ? x.end >= timing : x.end > timing;
+        return x.start <= timing && withEnd;
     }).length;
 }
 
