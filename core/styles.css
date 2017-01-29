@@ -75,7 +75,7 @@ g.timeChart {
 
 .lineCounter {
   stroke-width: 2;
-  stroke: gray;
+  stroke: #555;
 }
 
 .labelCounter {

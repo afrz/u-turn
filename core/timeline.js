@@ -16,7 +16,7 @@ while (timeCounter.isBefore(now)) {
 
 timeLine.push({
     timing: timeEnd,
-    label: now,
+    label: '',
     kind: 'now',
     counter: countEmployees(timeEnd, true)
 });
