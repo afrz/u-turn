@@ -1,29 +1,28 @@
 //scaling methods
 
-var scaleX = d3.scale.linear()
-    .domain([timeBegin, timeEnd])
-    .range([0, w]);
+var scaler = {};
 
-// var x1 = d3.scale.linear()
-//     .range([0, w]);
-//
-// var y1 = d3.scale.linear()
-//     .domain([0, totalPersons])
-//     .range([0, timeChartHeight]);
+function computeScale() {
 
-var scaleY2 = d3.scale.linear()
-    .domain([0, totalPersons])
-    .range([0, personChartHeight]);
+    scaler.scaleX = d3.scale.linear()
+        .domain([cfg.timeBegin, cfg.timeEnd])
+        .range([0, cfg.w]);
 
-var linearWidth = function(num) {
-    return (num * w) / (timeEnd - timeBegin);
+
+    scaler.scaleY2 = d3.scale.linear()
+        .domain([0, cfg.totalPersons])
+        .range([0, cfg.personChartHeight]);
 }
 
-var timeXOffset = function(t) {
-    return mLeft + linearWidth(t.timing);
+var linearWidth = function (num) {
+    return (num * cfg.w) / (cfg.timeEnd - cfg.timeBegin);
+}
+
+var timeXOffset = function (t) {
+    return cfg.mLeft + linearWidth(t.timing);
 };
 
-var countYHeight = function(ct, max) {
-    const availHeight = personChartHeight;
+var countYHeight = function (ct, max) {
+    const availHeight = cfg.personChartHeight;
     return availHeight - (ct.counter * availHeight) / max;
 }

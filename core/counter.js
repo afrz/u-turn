@@ -4,9 +4,9 @@ function displayCounters(chart) {
 
     var counterChart = chart.append("g")
         //.attr("transform", "translate(" + m[3] + "," + (mainHeight + m[0]) + ")")
-        .attr("transform", "translate(0," + (chartShift + mTop) + ")")
-        .attr("width", w)
-        .attr("height", counterChartHeight)
+        .attr("transform", "translate(0," + (cfg.chartShift + cfg.mTop) + ")")
+        .attr("width", cfg.w)
+        .attr("height", cfg.counterChartHeight)
         .attr("class", "mini");
 
     //max person for a time slice

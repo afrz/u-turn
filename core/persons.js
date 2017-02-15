@@ -1,23 +1,23 @@
 function displayPersons(chart) {
 
     var personChart = chart.append("g")
-        .attr("transform", "translate(0," + (chartShift + mTop) + ")")
-        .attr("width", w)
-        .attr("height", personChartHeight)
+        .attr("transform", "translate(0," + (cfg.chartShift + cfg.mTop) + ")")
+        .attr("width", cfg.w)
+        .attr("height", cfg.personChartHeight)
         .attr("class", "mini");
 
     //mini item rectangles
     personChart.append("g").selectAll("miniItems")
-        .data(persons)
+        .data(cfg.persons)
         .enter().append("rect")
         .attr("class", function(d) {
             return "team_" + d.team;
         })
         .attr("x", function(d) {
-            return mLeft + scaleX(d.start);
+            return cfg.mLeft + scaler.scaleX(d.start);
         })
         .attr("y", function(d) {
-            return scaleY2(d.id + .5) - 7;
+            return scaler.scaleY2(d.id + .5) - 7;
         })
         .attr("width", function(p) {
             return linearWidth(p.duration) + 1;
@@ -31,16 +31,16 @@ function displayPersons(chart) {
 
     //mini labels
     personChart.append("g").selectAll(".miniLabels")
-        .data(persons)
+        .data(cfg.persons)
         .enter().append("text")
         .text(function(p) {
             return p.name;
         })
         .attr("x", function(p) {
-            return mLeft + scaleX(p.start) - (p.name.length * 7 + 2);
+            return cfg.mLeft + scaler.scaleX(p.start) - (p.name.length * 7 + 2);
         })
         .attr("y", function(p) {
-            return scaleY2(p.id + 0.5);
+            return scaler.scaleY2(p.id + 0.5);
         })
         .attr("dy", ".5ex");
 }

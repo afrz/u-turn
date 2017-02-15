@@ -1,9 +1,13 @@
-function display() {
+function display(people) {
+
+    computeConfig(people);
+    computeScale();
+    computeTimeline();
 
     var chart = d3.select("body")
         .append("svg")
-        .attr("width", w + mLeft + mRight)
-        .attr("height", h + mTop + mBottom)
+        .attr("width", cfg.w + cfg.mLeft + cfg.mRight)
+        .attr("height", cfg.h + cfg.mTop + cfg.mBottom)
         .attr("class", "chart");
 
     displayTimeline(chart);
@@ -11,6 +15,10 @@ function display() {
     displayCounters(chart);
 }
 
-document.addEventListener("DOMContentLoaded", function() {
-    display();
-});
+function displayLazy(people) {
+
+    //wait until DOM loaded to display data
+    document.addEventListener("DOMContentLoaded", function () {
+        display(people)
+    });
+}

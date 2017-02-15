@@ -1,63 +1,67 @@
 var timeLine = [];
-var timeCounter = moment(epochString);
 
-while (timeCounter.isBefore(now)) {
+function computeTimeline() {
 
-    var primer = timeCounter.get('month') === 0;
-    var timing = timeCounter.diff(epoch, unit);
+    var timeCounter = moment(cfg.epochString);
+
+    while (timeCounter.isBefore(cfg.now)) {
+
+        var primer = timeCounter.get('month') === 0;
+        var timing = timeCounter.diff(cfg.epoch, cfg.unit);
+        timeLine.push({
+            timing: timing,
+            label: primer ? timeCounter.format("YYYY") : '',
+            kind: primer ? 'primary' : 'secondary',
+            counter: countEmployees(timing, false)
+        });
+        timeCounter.add(1, 'M');
+    }
+
     timeLine.push({
-        timing: timing,
-        label: primer ? timeCounter.format("YYYY") : '',
-        kind: primer ? 'primary' : 'secondary',
-        counter: countEmployees(timing, false)
+        timing: cfg.timeEnd,
+        label: '',
+        kind: 'now',
+        counter: countEmployees(cfg.timeEnd, true)
     });
-    timeCounter.add(1, 'M');
 }
-
-timeLine.push({
-    timing: timeEnd,
-    label: '',
-    kind: 'now',
-    counter: countEmployees(timeEnd, true)
-});
 
 function displayTimeline(chart) {
 
     var timeChart = chart.append("g")
         //.attr("transform", "translate(" + (m[3]) + "," + (m[0]) + ")")
-        .attr("width", w)
-        .attr("height", timeChartHeight)
+        .attr("width", cfg.w)
+        .attr("height", cfg.timeChartHeight)
         .attr("class", "timeChart");
 
-    var labelYOffset = function(t) {
+    var labelYOffset = function (t) {
         return t.kind === 'secondary' ? '2ex' : '-1ex';
     };
 
-    var labelXOffset = function(t) {
+    var labelXOffset = function (t) {
         return t.kind === 'now' ? '-10ex' : '-2ex';
     };
 
     timeChart.append("g").selectAll(".idLines")
         .data(timeLine)
         .enter().append("line")
-        .attr("class", function(x) {
+        .attr("class", function (x) {
             return "absciss_" + x.kind;
         })
         .attr("x1", timeXOffset)
-        .attr("y1", function(x) {
-            return x.kind === 'secondary' ? mTop + 10 : mTop;
+        .attr("y1", function (x) {
+            return x.kind === 'secondary' ? cfg.mTop + 10 : cfg.mTop;
         })
         .attr("x2", timeXOffset)
-        .attr("y2", timeChartHeight);
+        .attr("y2", cfg.timeChartHeight);
 
     timeChart.append("g").selectAll(".miniLabels")
         .data(timeLine)
         .enter().append("text")
-        .text(function(d) {
+        .text(function (d) {
             return d.label;
         })
         .attr("x", timeXOffset)
-        .attr("y", mTop)
+        .attr("y", cfg.mTop)
         .attr("dx", labelXOffset)
         .attr("dy", labelYOffset);
 }
