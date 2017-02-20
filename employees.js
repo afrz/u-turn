@@ -57,7 +57,7 @@ if (mainURL && window.fetch) {
       display(json);
     })
     .catch(function (ex) {
-      console.log('Parsing failed', ex)      
+      console.log('Parsing failed', ex);
       display(randomEmpoyees());
     });
 
