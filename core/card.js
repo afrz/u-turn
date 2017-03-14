@@ -11,7 +11,7 @@ var onMouseOver = function(e) {
         card.getElementsByClassName("duration")[0].innerHTML = moment.duration(e.duration, cfg.unit).humanize();
         card.getElementsByClassName("photo")[0].alt = e.name;
         if (mainURL) {
-            card.getElementsByClassName("photo")[0].src = mainURL + '/images/' + e.name + '.png';
+            card.getElementsByClassName("photo")[0].src = atob(mainURL) + '/images/' + e.name + '.png';
         }
     }
 };

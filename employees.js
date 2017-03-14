@@ -46,7 +46,7 @@ function randomEmpoyees() {
 var mainURL = getParameterByName('url');
 //retreive data from url
 if (mainURL && window.fetch) {
-  var url = mainURL + '/people.json';
+  var url = atob(mainURL) + '/people.json';
   fetch(url)
     .then(function (response) {
       if (response.ok) {
