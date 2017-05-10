@@ -56,6 +56,12 @@ g.timeChart {
   cursor : crosshair;
 }
 
+.team_integ {
+  fill: #EAA760;
+  stroke-width: 6;
+  cursor : crosshair;
+}
+
 .absciss_primary {
   stroke-width: 1;
   stroke: gray;
