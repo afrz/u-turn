@@ -10,7 +10,7 @@ function displayCounters(chart) {
         .attr("class", "mini");
 
     //max person for a time slice
-    var maxPerson = _.max(timeLine, function(x) {
+    var maxPerson = _.max(counterLine, function(x) {
         return x.counter;
     }).counter;
 
@@ -23,7 +23,7 @@ function displayCounters(chart) {
     }
 
     //translate each time slice into a counter time object (used to draw lines)
-    var counterLines = timeLine.map(function(time, index, tab) {
+    var counterLines = counterLine.map(function(time, index, tab) {
 
         var counterTime = Object.assign({}, time);
         //compute starting point

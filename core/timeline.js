@@ -1,26 +1,48 @@
 var timeLine = [];
+var counterLine = [];
 
 function computeTimeline() {
 
     var timeCounter = moment(cfg.epochString);
 
+    var prevCounter = 0;
+    var currentCounter = 0;
+
     while (timeCounter.isBefore(cfg.now)) {
 
+        var firstDayOfMonth = timeCounter.date() === 1;
         var primer = timeCounter.get('month') === 0;
         var timing = timeCounter.diff(cfg.epoch, cfg.unit);
-        timeLine.push({
-            timing: timing,
-            label: primer ? timeCounter.format("YYYY") : '',
-            kind: primer ? 'primary' : 'secondary',
-            counter: countEmployees(timing, false)
-        });
-        timeCounter.add(1, 'M');
+        if (firstDayOfMonth) {
+          timeLine.push({
+              timing: timing,
+              label: primer ? timeCounter.format("YYYY") : '',
+              kind: primer ? 'primary' : 'secondary',
+              counter: countEmployees(timing, false)
+          })
+        }
+
+        currentCounter =  countEmployees(timing, false);
+        if (currentCounter != prevCounter)
+        {
+            prevCounter = currentCounter;
+            counterLine.push({
+                timing: timing,
+                counter: currentCounter
+            });
+        }
+        timeCounter.add(1, 'days');
     }
 
     timeLine.push({
         timing: cfg.timeEnd,
         label: '',
         kind: 'now',
+        counter: countEmployees(cfg.timeEnd, true)
+    });
+
+    counterLine.push({
+        timing: cfg.timeEnd,
         counter: countEmployees(cfg.timeEnd, true)
     });
 }
