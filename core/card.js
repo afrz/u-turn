@@ -9,6 +9,8 @@ var onMouseOver = function(e) {
         card.getElementsByClassName("from")[0].innerHTML = moment(e.from).format("LL");
         card.getElementsByClassName("to")[0].innerHTML = moment(e.to).format("LL");
         card.getElementsByClassName("duration")[0].innerHTML = moment.duration(e.duration, cfg.unit).humanize();
+        card.getElementsByClassName("score")[0].innerHTML = countEmployeesEaten(e);
+        
         card.getElementsByClassName("photo")[0].alt = e.name;
         if (mainURL) {
             card.getElementsByClassName("photo")[0].src = atob(mainURL) + '/images/' + e.name + '.png';
