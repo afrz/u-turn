@@ -17,8 +17,7 @@ function computeTimeline() {
           timeLine.push({
               timing: timing,
               label: primer ? timeCounter.format("YYYY") : '',
-              kind: primer ? 'primary' : 'secondary',
-              counter: countEmployees(timing, false)
+              kind: primer ? 'primary' : 'secondary'
           })
         }
 
@@ -37,8 +36,7 @@ function computeTimeline() {
     timeLine.push({
         timing: cfg.timeEnd,
         label: '',
-        kind: 'now',
-        counter: countEmployees(cfg.timeEnd, true)
+        kind: 'now'
     });
 
     counterLine.push({
