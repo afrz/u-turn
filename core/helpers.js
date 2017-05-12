@@ -14,3 +14,11 @@ function countEmployees(timing, inclusive = false) {
         return x.start <= timing && withEnd;
     }).length;
 }
+
+//count eaten employees during a period
+function countEmployeesEaten(e) {
+    return cfg.persons.filter(function(x) {
+        const withEnd = x.to != cfg.now && x.to < e.to;
+        return x.from > e.from && withEnd;
+    }).length;
+}
