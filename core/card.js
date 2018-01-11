@@ -13,6 +13,8 @@ var onMouseOver = function(e) {
     card.getElementsByClassName("duration")[0].innerHTML = moment
       .duration(e.duration, cfg.unit)
       .humanize();
+    card.getElementsByClassName("score")[0].innerHTML = countEmployeesEaten(e);
+
     card.getElementsByClassName("photo")[0].alt = e.name;
     if (mainURL) {
       card.getElementsByClassName("photo")[0].src =
