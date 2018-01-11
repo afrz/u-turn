@@ -1,11 +1,12 @@
 function randomEmpoyees() {
-
   var rdm = [];
 
-  var allTeams = ["business", "tech", "admin", "com"];
+  var allTeams = ["business", "tech", "admin", "com", "integ", "presta"];
 
   function randomDate(start, end) {
-    return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+    return new Date(
+      start.getTime() + Math.random() * (end.getTime() - start.getTime())
+    );
   }
 
   function randomTeam() {
@@ -14,7 +15,8 @@ function randomEmpoyees() {
 
   function randomName() {
     var text = "";
-    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    var possible =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
     for (var i = 0; i < 6; i++)
       text += possible.charAt(Math.floor(Math.random() * possible.length));
@@ -23,11 +25,10 @@ function randomEmpoyees() {
   }
 
   var today = new Date();
-  var turnoverRatio = 0.4;
+  var turnoverRatio = 0.6;
 
-  for (i = 0; i < 30; i++) {
-
-    var randomStart = randomDate(new Date(2012, 01, 01), today)
+  for (i = 0; i < 50; i++) {
+    var randomStart = randomDate(new Date(2012, 01, 01), today);
     var randomEnd = randomDate(randomStart, today);
 
     if (Math.random() > turnoverRatio) {
@@ -39,30 +40,28 @@ function randomEmpoyees() {
       from: randomStart,
       to: randomEnd
     });
-  }  
+  }
   return rdm;
 }
 
-var mainURL = getParameterByName('url');
+var mainURL = getParameterByName("url");
 //retreive data from url
 if (mainURL && window.fetch) {
-  var url = atob(mainURL) + '/people.json';
+  var url = atob(mainURL) + "/people.json";
   fetch(url)
-    .then(function (response) {
+    .then(function(response) {
       if (response.ok) {
         return response.json();
       }
     })
-    .then(function (json) {      
+    .then(function(json) {
       display(json);
     })
-    .catch(function (ex) {
-      console.log('Parsing failed', ex);
+    .catch(function(ex) {
+      console.log("Parsing failed", ex);
       display(randomEmpoyees());
     });
-
 } else {
-
-  //default : display random 
+  //default : display random
   displayLazy(randomEmpoyees());
 }

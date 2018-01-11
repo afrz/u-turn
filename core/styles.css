@@ -14,7 +14,14 @@ body {
   min-width: 150px;
 }
 
-.name, .duration {
+.photo {
+  width: 100%;
+  max-width: 150px;
+  border: 1px solid #ccc;
+}
+
+.name,
+.duration {
   font-weight: bold;
 }
 
@@ -33,33 +40,39 @@ g.timeChart {
 }
 
 .team_tech {
-  fill: #65AB49;
+  fill: #65ab49;
   stroke-width: 6;
-  cursor : crosshair;
+  cursor: crosshair;
 }
 
 .team_business {
   fill: #3498db;
   stroke-width: 6;
-  cursor : crosshair;
+  cursor: crosshair;
 }
 
 .team_admin {
-  fill: #f39c12;
+  fill: #f3a412;
   stroke-width: 6;
-  cursor : crosshair;
+  cursor: crosshair;
 }
 
 .team_com {
-  fill: #8F49AB;
+  fill: #8f49ab;
   stroke-width: 6;
-  cursor : crosshair;
+  cursor: crosshair;
 }
 
 .team_integ {
-  fill: #955628;
+  fill: #c74a35;
   stroke-width: 6;
-  cursor : crosshair;
+  cursor: crosshair;
+}
+
+.team_presta {
+  fill: #777;
+  stroke-width: 6;
+  cursor: crosshair;
 }
 
 .absciss_primary {
