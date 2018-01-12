@@ -54,16 +54,18 @@ function computeConfig(people) {
   cfg.mRight = 20;
   cfg.mLeft = 125;
   cfg.mTop = 20;
-  cfg.mBottom = 20;
+  cfg.mBottom = 50;
+
+  var personHeight = 20;
+
   //compute available display size (minus some hardcoded values that depends on screen resolution...)
   cfg.w = window.innerWidth - cfg.mLeft - cfg.mRight - 50;
-  cfg.h = window.innerHeight - cfg.mTop - cfg.mBottom - 120;
+  cfg.h = cfg.totalPersons * personHeight;
 
   //size to take to shift chart between them
   cfg.chartShift = 10;
 
-  var personHeight = 20;
-  cfg.personChartHeight = cfg.totalPersons * personHeight;
-  cfg.timeChartHeight = cfg.personChartHeight + cfg.mTop + cfg.chartShift;
-  cfg.counterChartHeight = cfg.personChartHeight + cfg.mTop + cfg.chartShift;
+  cfg.personChartHeight = cfg.h;
+  cfg.timeChartHeight = cfg.h + cfg.mTop + cfg.chartShift;
+  cfg.counterChartHeight = cfg.h + cfg.mTop + cfg.chartShift;
 }

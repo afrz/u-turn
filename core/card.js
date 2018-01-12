@@ -1,8 +1,13 @@
-var onMouseOver = function(e) {
+function computeLocalOffset(index) {
+  if (index > cfg.totalPersons / 2) return 230;
+  return 30;
+}
+
+var onMouseOver = function(e, i) {
   var card = document.getElementsByClassName("card")[0];
   if (card) {
     card.style.display = "block";
-    card.style.top = -25 + d3.event.offsetY + "px";
+    card.style.top = d3.event.offsetY - computeLocalOffset(i) + "px";
     card.style.left = -250 + d3.event.offsetX + "px";
 
     card.getElementsByClassName("name")[0].innerHTML = e.name;
