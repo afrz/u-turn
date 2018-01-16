@@ -8,15 +8,18 @@ body {
 .card {
   display: none;
   position: absolute;
-  padding: 10px;
-  border: 1px solid black;
-  background: #ddd;
+  padding: 5px;
+  background: white;
   min-width: 150px;
+  border-radius: 3px;
+  box-shadow: 0px 0px 5px 2px #656565;
+  text-align: center;
 }
 
 .photo {
-  width: 100%;
-  max-width: 150px;
+  min-height: 175px;
+  height: 175px;
+  width: auto;
   border: 1px solid #ccc;
 }
 
@@ -29,7 +32,8 @@ body {
   font-size: 20px;
 }
 
-.score, .scorelbl {
+.score,
+.scorelbl {
   font-weight: bold;
   font-size: 12px;
 }

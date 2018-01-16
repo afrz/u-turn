@@ -1,6 +1,8 @@
 function computeLocalOffset(index) {
-  if (index > cfg.totalPersons / 2) return 230;
-  return 30;
+  var popupCardHeight = 300;
+  //transform index into 0-1 ratio
+  var ratio = index / Math.max(1, cfg.totalPersons);
+  return ratio * popupCardHeight;
 }
 
 var onMouseOver = function(e, i) {
